@@ -1,9 +1,12 @@
 "use client";
+import { useCustomToast } from "./hook/useCustomToast";
 import styles from "./page.module.css";
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
+import { Button, Text, VStack, useToast } from "@chakra-ui/react";
 
 export default function Home() {
   const toast = useToast();
+  const customToast = useCustomToast();
+
   const handleClick = () => {
     toast({
       title: "Title of the toast",
@@ -14,12 +17,17 @@ export default function Home() {
     });
   };
 
+  const handleCustomToastClick = () => {
+    customToast({ duration: 9000, title: "Custom Toast", status: "success" });
+  };
+
   return (
     <main className={styles.main}>
-      <Box>
-        <Text>Chakra UI test</Text>
-        <Button onClick={handleClick}>Click me</Button>
-      </Box>
+      <VStack>
+        <Text>Chakra UI - storybook toast integration test</Text>
+        <Button onClick={handleClick}>Show standard toast</Button>
+        <Button onClick={handleCustomToastClick}>Show custom toast</Button>
+      </VStack>
     </main>
   );
 }
